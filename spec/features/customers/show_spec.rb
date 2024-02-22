@@ -20,6 +20,10 @@ RSpec.describe type: :feature do
       it "displays a list of customer items with thir attributes" do 
         expect(page).to have_content(@chippies.name)
         expect(page).to have_content(@dippies.name)
+        expect(page).to have_content(@chippies.price)
+        expect(page).to have_content(@dippies.price)
+        expect(page).to have_content(@dippies.supermarket.name)
+        expect(page).to have_content(@chippies.supermarket.name)
       end
     end
   end
