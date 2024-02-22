@@ -6,3 +6,9 @@
   <p><%= "$#{item.price}" %></p>
   <p><%= item.supermarket.name %></p>
 <% end %>
+
+<%= form_with url: "/customer_items", method: :post do |f| %>
+  <%= f.hidden_field :customer_id, value: @customer.id %>
+  <%= f.collection_select :item_id, Item.all, :id, :name %>
+  <%= f.submit "Add Item" %>
+<% end %>
