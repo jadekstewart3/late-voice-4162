@@ -8,4 +8,6 @@ Rails.application.routes.draw do
   resources :customer_items, only: :create
 
   resources :items, only: :index
+
+  resources :supermarkets, only: :show
 end
