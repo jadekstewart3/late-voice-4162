@@ -8,6 +8,7 @@ RSpec.describe type: :feature do
         @phil = Customer.create!(name: "Philip DeFraties")
         @chippies = Item.create!(name: "La Favorita", price: 3, supermarket_id: soops.id)
         @dippies = Item.create!(name: "Sabra Hummus", price: 4, supermarket_id: soops.id)
+        @celery = Item.create!(name: "Celery", price: 2, supermarket_id: soops.id)
         CustomerItem.create!( customer_id: @phil.id, item_id: @chippies.id)
         CustomerItem.create!( customer_id: @phil.id, item_id: @dippies.id)
         visit customer_path(@phil)
@@ -24,6 +25,15 @@ RSpec.describe type: :feature do
         expect(page).to have_content(@dippies.price)
         expect(page).to have_content(@dippies.supermarket.name)
         expect(page).to have_content(@chippies.supermarket.name)
+      end
+
+      it "displays a form to add an item to the customer" do 
+        expect(page).to have_field(:item_id)
+
+        select @celery.name, from: :item_id
+        click_button "Add Item"
+
+        expect(page).to have_content("Celery")
       end
     end
   end
